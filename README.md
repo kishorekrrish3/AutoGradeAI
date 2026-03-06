@@ -1,130 +1,318 @@
-# 📝 **Automated Grading System using EasyOCR and Semantic Similarity** 🚀
+<div align="center">
 
-## 🎯 Project Overview
+# 📝 AutoGradeAI
 
-Welcome to the **Automated Grading System** – a cutting-edge solution that automates the grading process for handwritten student answers! This web-based application leverages **EasyOCR** to extract text from scanned answer sheets, **TextBlob** for spelling correction, and **Sentence Transformers** for advanced semantic similarity comparison. By comparing the student's answer to the model answer, the system generates a similarity score, which is then used to calculate the final grade – all while supporting customizable weightage for each question. 📊
+### Intelligent Automated Grading using OCR and Semantic Similarity
 
-Say goodbye to manual grading! This tool helps teachers streamline the grading process, reduce errors, and focus on what truly matters: personalized feedback and teaching. 🎓
+**A smart AI-powered grading system that evaluates handwritten student answers by combining OCR, NLP, and semantic similarity.**
+*Upload an answer sheet, compare it with the model answer, and automatically compute a fair grade.*
 
----
+<br>
 
-## 🌟 Key Features
+[![Python](https://img.shields.io/badge/Python_3.12-3776AB?style=for-the-badge\&logo=python\&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit_App-FF4B4B?style=for-the-badge\&logo=streamlit\&logoColor=white)](https://streamlit.io/)
+[![EasyOCR](https://img.shields.io/badge/EasyOCR-OCR_Engine-4CAF50?style=for-the-badge)](https://github.com/JaidedAI/EasyOCR)
+[![SentenceTransformers](https://img.shields.io/badge/SentenceTransformers-NLP_Model-8E75B2?style=for-the-badge)](https://www.sbert.net/)
+[![TextBlob](https://img.shields.io/badge/TextBlob-Spelling_Correction-FFA500?style=for-the-badge)](https://textblob.readthedocs.io/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)]()
 
-- **OCR Text Extraction**: Harnessing the power of EasyOCR to extract text from scanned answer sheet images.
-- **Spelling Correction**: Automatic error-free text, thanks to **TextBlob**'s spell-checking capabilities.
-- **Semantic Similarity**: Compare the student’s answer to the model answer using **SentenceTransformers**, providing a much more accurate measure than simple keyword matching.
-- **Flexible Grading**: Enter the total weightage for each question, and let the system adjust the final grade accordingly, ensuring fairness and accuracy.
-
----
-
-## 💻 Tech Stack
-
-- **Python**: The language behind the magic.
-- **EasyOCR**: For text extraction from images – no more manual transcription!
-- **Streamlit**: A seamless way to create and interact with the app through a user-friendly interface.
-- **SentenceTransformers**: Leverages powerful embeddings to understand semantic meaning and compare answers.
-- **TextBlob**: Fixing spelling errors and making sure everything reads perfectly.
-- **NumPy & PIL**: For efficient image processing and manipulation.
+</div>
 
 ---
 
-## 🚀 Implementation Steps
+# 📖 What is AutoGradeAI?
 
-### 1. **Set Up Your Environment**
+AutoGradeAI is an **AI-powered automated grading system** designed to streamline the evaluation of handwritten student answers.
 
-First, clone the repository and install all the required dependencies:
+Traditional grading requires teachers to manually read and score each answer. This project eliminates that burden by combining **OCR (Optical Character Recognition)** and **semantic similarity models** to evaluate answers intelligently.
+
+When an answer sheet is uploaded:
+
+1. **EasyOCR extracts text** from the scanned handwritten answer.
+2. **TextBlob corrects spelling errors** introduced during OCR extraction.
+3. **SentenceTransformers generates embeddings** for both student and model answers.
+4. The system computes a **semantic similarity score** between them.
+5. The similarity score is converted into a **final grade based on configurable weightage**.
+
+The result is a system that **evaluates answers based on meaning rather than exact wording**, making grading more fair and efficient.
+
+---
+
+# ✨ Features
+
+| Feature                               | Description                                                 |
+| ------------------------------------- | ----------------------------------------------------------- |
+| 🧠 **AI-Powered Grading**             | Uses semantic similarity instead of simple keyword matching |
+| 📝 **Handwritten Text Extraction**    | EasyOCR extracts text directly from scanned answer sheets   |
+| ✍️ **Spelling Correction**            | TextBlob automatically corrects OCR mistakes                |
+| 🎯 **Semantic Similarity Evaluation** | SentenceTransformers compares meaning between answers       |
+| ⚖️ **Custom Weightage System**        | Teachers can define marks per question                      |
+| 📊 **Similarity-Based Grading**       | Marks are calculated from similarity score percentages      |
+| 🌐 **Interactive Web App**            | Built with Streamlit for easy use                           |
+
+---
+
+# 🏗️ System Architecture
+
+### Grading Pipeline
+
+```mermaid
+graph TD
+    A[👤 Teacher uploads answer sheet] --> B[Streamlit Web Interface]
+    B --> C[Image Processing]
+    C --> D[EasyOCR Text Extraction]
+    D --> E[TextBlob Spelling Correction]
+
+    E --> F[Student Answer Embedding]
+    G[Model Answer] --> H[Model Embedding]
+
+    F --> I[Semantic Similarity Calculation]
+    H --> I
+
+    I --> J[Similarity Score %]
+    J --> K[Weightage-based Grade Calculation]
+    K --> L[Final Marks Output]
+```
+
+---
+
+### Processing Workflow
+
+The grading process consists of four main stages:
+
+1️⃣ **OCR Extraction**
+
+* EasyOCR scans the uploaded answer sheet
+* Extracts the handwritten content into machine-readable text
+
+2️⃣ **Text Cleaning**
+
+* TextBlob performs spelling correction
+* Ensures OCR errors do not affect evaluation
+
+3️⃣ **Semantic Comparison**
+
+* SentenceTransformers generates embeddings
+* Cosine similarity measures how closely answers match
+
+4️⃣ **Grade Computation**
+
+* Similarity score converted into marks
+* Adjusted based on **teacher-defined weightage**
+
+---
+
+# 🛠️ Technology Stack
+
+### Core System
+
+| Component            | Technology             |
+| -------------------- | ---------------------- |
+| Programming Language | `Python`               |
+| Web Interface        | `Streamlit`            |
+| OCR Engine           | `EasyOCR`              |
+| Semantic Similarity  | `SentenceTransformers` |
+| Spelling Correction  | `TextBlob`             |
+| Image Processing     | `PIL`                  |
+| Numerical Processing | `NumPy`                |
+
+---
+
+# 📂 Project Structure
+
+```text
+automated-grading-system/
+│
+├── app.py                 # Streamlit application
+├── grading_engine.py      # Core grading logic
+├── ocr_processor.py       # EasyOCR extraction
+├── similarity_model.py    # SentenceTransformer embedding + similarity
+├── utils/
+│   ├── spell_correct.py   # TextBlob spelling correction
+│   └── image_utils.py     # Image preprocessing utilities
+│
+├── requirements.txt       # Python dependencies
+└── README.md
+```
+
+---
+
+# 🚀 Installation & Setup
+
+### Prerequisites
+
+* Python 3.9+
+* pip
+* GPU optional (for faster OCR processing)
+
+---
+
+## 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/automated-grading-system.git
 cd automated-grading-system
+```
+
+---
+
+## 2️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-This will install all the libraries you'll need, including Streamlit, EasyOCR, and SentenceTransformers.
+This installs:
 
-### 2. **Launch the Application**
+* Streamlit
+* EasyOCR
+* SentenceTransformers
+* TextBlob
+* NumPy
+* Pillow
 
-Now you're ready to launch the app! Run the following command to start your local server:
+---
+
+# 🏃 Running the Application
+
+Launch the Streamlit app:
 
 ```bash
 streamlit run app.py
 ```
 
-Your browser will open the application, and you can begin uploading images and testing out the grading system.
+The application will start locally:
 
-### 3. **Upload an Answer Sheet**
-
-In the app, upload a scanned image of a student’s answer sheet (formats: PNG, JPG, JPEG). The system will automatically process and extract the text using OCR.
-
-### 4. **Enter the Model Answer**
-
-Once the text is extracted, input the **model answer** for that specific question into the provided text box. This will be used as the benchmark for comparison.
-
-### 5. **Evaluate and Grade**
-
-Click "Evaluate," and let the system work its magic. The app will compare the extracted student answer to the model answer using semantic similarity, correct any spelling mistakes, and then calculate the final grade based on the similarity score and the weightage you specify.
+```
+http://localhost:8501
+```
 
 ---
 
-## 🔍 How the Grading Process Works
+# 🌐 Application Workflow
 
-1. **Text Extraction**: Upload the answer sheet, and EasyOCR extracts the handwritten content.
-2. **Spelling Correction**: TextBlob fixes any OCR errors in the extracted content, ensuring clean text.
-3. **Semantic Similarity**: The corrected answer is compared to the model answer using **SentenceTransformers**, which calculates a semantic similarity score.
-4. **Grading**: The final grade is calculated based on the similarity score, weighted by the value you assign to the question.
+### Step 1 — Upload Answer Sheet
 
-The output includes:
-- **Corrected Student Answer**: See the OCR text after spelling corrections.
-- **Similarity Score**: A percentage that indicates how closely the student's answer matches the model answer.
-- **Marks Scored**: The final score, adjusted for the weightage of the question.
+Upload a scanned image of the student answer sheet.
 
----
+Supported formats:
 
-## 💡 Example Use Case
-
-Imagine you're grading 100 assignments. With this system, you can upload the answer sheets, input the model answers, set the question weightage, and hit "Evaluate." The system does the rest, providing you with immediate feedback on each student's performance, including a similarity score and the final marks.
+* PNG
+* JPG
+* JPEG
 
 ---
 
-## ✨ Future Enhancements
+### Step 2 — Enter Model Answer
 
-While the current version of the app is highly functional, we have exciting plans for future improvements:
-
-- **Multi-Language Support**: Extend OCR and NLP capabilities to support multiple languages, making the system global-ready.
-- **Handwriting Recognition**: Enhance text extraction to better recognize and grade handwritten answers.
-- **Database Integration**: Store results, track student progress, and generate reports over time.
-- **Faster Performance**: Optimizing OCR and similarity calculations to make grading quicker, especially for larger documents.
+Provide the **correct reference answer** that will be used for evaluation.
 
 ---
 
-## 📑 License
+### Step 3 — Assign Weightage
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+Define the **maximum marks** for the question.
 
----
+Example:
 
-## 🙏 Acknowledgements
-
-- **EasyOCR**: The fantastic OCR tool for text extraction.
-- **TextBlob**: The go-to library for correcting spelling mistakes and making text read beautifully.
-- **SentenceTransformers**: Cutting-edge semantic similarity technology that takes text understanding to the next level.
+```
+Total marks: 10
+```
 
 ---
 
-## 🤝 Contributing
+### Step 4 — Evaluate
 
-We welcome contributions! If you have an idea for a feature or bug fix, feel free to fork the repository, create an issue, or submit a pull request. We’d love to collaborate and improve this project further!
+Click **Evaluate**, and the system will:
 
----
-
-## 📬 Contact
-
-Have any questions? Feel free to open an issue, or contact the project maintainer directly at `your-email@example.com`.
-
----
-
-### Ready to automate your grading? Try the **Automated Grading System using OCR** today and revolutionize the way you grade! 🚀
+* Extract text using OCR
+* Correct spelling
+* Compute semantic similarity
+* Calculate final marks
 
 ---
 
-This version is crafted to be more engaging, making it easier for users to understand the purpose of the project, the tech behind it, and how to use it. The addition of emojis, creative language, and structure should make the README stand out and encourage more users and contributors.
+# 📊 Example Output
+
+| Metric                   | Result          |
+| ------------------------ | --------------- |
+| Corrected Student Answer | Displayed in UI |
+| Similarity Score         | 87%             |
+| Total Marks              | 10              |
+| Marks Awarded            | 8.7             |
+
+---
+
+# ⚙️ Configuration
+
+| Setting          | File                  | Description               |
+| ---------------- | --------------------- | ------------------------- |
+| OCR Model        | `ocr_processor.py`    | EasyOCR language settings |
+| Similarity Model | `similarity_model.py` | SentenceTransformer model |
+| Grading Logic    | `grading_engine.py`   | Score calculation formula |
+| UI Interface     | `app.py`              | Streamlit UI              |
+
+---
+
+# 🐛 Known Issues & Troubleshooting
+
+### OCR accuracy issues
+
+Improve results by:
+
+* Using **high-resolution images**
+* Avoiding skewed answer sheets
+* Ensuring **clear handwriting**
+
+---
+
+### Slow processing
+
+OCR and embeddings can be slow on CPU.
+
+Solutions:
+
+* Enable GPU for EasyOCR
+* Use lighter SentenceTransformer models
+
+---
+
+# 🔮 Future Improvements
+
+* 🌍 **Multi-language grading**
+* ✍️ **Improved handwriting recognition**
+* 🧠 **Context-aware answer evaluation**
+* 🗂️ **Student result database**
+* 📊 **Analytics dashboard for teachers**
+* 📑 **Bulk grading support**
+
+---
+
+# 📑 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+# 🙏 Acknowledgements
+
+This project was built using several powerful open-source technologies:
+
+* **EasyOCR** — text extraction from images
+* **TextBlob** — spelling correction and NLP utilities
+* **SentenceTransformers** — semantic similarity modeling
+* **Streamlit** — rapid web app development for AI projects
+
+---
+
+<div align="center">
+
+<br>
+
+<i>Transforming traditional grading into intelligent AI evaluation.</i>
+
+<br><br>
+
+<b>AutoGradeAI</b> — because grading should measure understanding, not just keywords.
+
+</div>
