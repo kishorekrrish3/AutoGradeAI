@@ -20,6 +20,9 @@
 
 ---
 
+> **Project status:** Research/educational grading assistance, not a replacement for educator judgment. OCR and semantic-similarity scores can misread handwriting, language variation, and valid alternative answers; review results before assigning grades.
+
+
 # 📖 What is AutoGradeAI?
 
 AutoGradeAI is an **AI-powered automated grading system** designed to streamline the evaluation of handwritten student answers.
